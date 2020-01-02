@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter, Link } from 'react-router-dom';
+// import { Link } from 'react-router';
+import Login from './components/Login';
+import withAuth from './middleware/withAuth';
+import Home from './components/Home'
+// import NavBar from './components/NavBar'
+// import CoursesList from './components/CoursesList'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/secret">secret</Link>
+        </li>
+        <li>
+          <Link to="/login">login</Link>
+        </li>
+      </ul>
+      <div>
+        <Route exact path="/secret" component={withAuth(Home)} />
+        <Route path="/login" component={Login} />
+      </div>
+    </BrowserRouter>
   );
 }
 
